@@ -1,48 +1,84 @@
-/* style.css */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ecf9f3;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #155b2f;
+}
 
-.flip-counter {
+.container {
+  padding: 40px 20px;
+}
+
+.logo {
+  max-width: 220px;
+  margin-bottom: 20px;
+}
+
+.headline {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.counter {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  font-family: 'Roboto Mono', monospace;
+  gap: 10px;
 }
 
-.flip-card {
-  perspective: 1000px;
-  width: 70px;
-  height: 100px;
-  position: relative;
-}
-
-.flip-card .digit {
-  background: #155b2f;
+.flip-digit {
+  background-color: #155b2f;
   color: white;
   font-size: 60px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 100px;
+  width: 60px;
+  height: 90px;
   border-radius: 12px;
-  box-shadow: 0 6px 10px rgba(0,0,0,0.2);
-  transition: transform 0.5s ease-in-out;
-  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+  perspective: 1000px;
+}
+
+.flip-digit.flip::before,
+.flip-digit.flip::after {
+  content: attr(data-digit);
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 50%;
+  left: 0;
+  background: #155b2f;
+  color: white;
+  line-height: 45px;
+  font-size: 60px;
+  font-weight: bold;
+  overflow: hidden;
   backface-visibility: hidden;
 }
 
-.flip-card.flip .digit {
-  animation: flipUp 0.5s ease-in-out;
+.flip-digit.flip::before {
+  top: 0;
+  border-bottom: 1px solid #0e3c20;
+  transform-origin: bottom;
+  animation: flipTop 0.3s ease forwards;
 }
 
-@keyframes flipUp {
-  0% {
-    transform: rotateX(0deg);
-  }
-  50% {
-    transform: rotateX(-90deg);
-  }
-  100% {
-    transform: rotateX(0deg);
-  }
+.flip-digit.flip::after {
+  bottom: 0;
+  border-top: 1px solid #0e3c20;
+  transform-origin: top;
+  animation: flipBottom 0.3s ease 0.3s forwards;
+}
+
+@keyframes flipTop {
+  0% { transform: rotateX(0deg); }
+  100% { transform: rotateX(-90deg); }
+}
+
+@keyframes flipBottom {
+  0% { transform: rotateX(90deg); }
+  100% { transform: rotateX(0deg); }
 }
