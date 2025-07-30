@@ -1,10 +1,9 @@
 body {
   margin: 0;
-  padding: 0;
-  background-color: #ecf9f3;
   font-family: Arial, sans-serif;
-  text-align: center;
+  background-color: #ecf9f3;
   color: #155b2f;
+  text-align: center;
 }
 
 .container {
@@ -18,67 +17,41 @@ body {
 
 .headline {
   font-size: 2em;
-  font-weight: bold;
   margin-bottom: 30px;
+  font-weight: bold;
 }
 
-.counter {
+#flip-counter {
   display: flex;
   justify-content: center;
   gap: 10px;
 }
 
-.flip-digit {
-  background-color: #155b2f;
-  color: white;
-  font-size: 60px;
-  width: 60px;
-  height: 90px;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.digit {
   position: relative;
-  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-  perspective: 1000px;
-}
-
-.flip-digit.flip::before,
-.flip-digit.flip::after {
-  content: attr(data-digit);
-  position: absolute;
-  width: 100%;
-  height: 50%;
-  left: 0;
   background: #155b2f;
   color: white;
-  line-height: 45px;
+  width: 60px;
+  height: 90px;
   font-size: 60px;
-  font-weight: bold;
+  border-radius: 10px;
+  line-height: 90px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  perspective: 1000px;
   overflow: hidden;
-  backface-visibility: hidden;
 }
 
-.flip-digit.flip::before {
-  top: 0;
-  border-bottom: 1px solid #0e3c20;
+.digit span {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
   transform-origin: bottom;
-  animation: flipTop 0.3s ease forwards;
+  backface-visibility: hidden;
+  animation: flip 0.5s ease forwards;
 }
 
-.flip-digit.flip::after {
-  bottom: 0;
-  border-top: 1px solid #0e3c20;
-  transform-origin: top;
-  animation: flipBottom 0.3s ease 0.3s forwards;
-}
-
-@keyframes flipTop {
-  0% { transform: rotateX(0deg); }
-  100% { transform: rotateX(-90deg); }
-}
-
-@keyframes flipBottom {
-  0% { transform: rotateX(90deg); }
-  100% { transform: rotateX(0deg); }
+@keyframes flip {
+  0% { transform: rotateX(90deg); opacity: 0; }
+  100% { transform: rotateX(0deg); opacity: 1; }
 }
