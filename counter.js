@@ -1,4 +1,4 @@
-const targetNumber = 3450;
+const targetNumber = 13450;
 const counter = document.getElementById('flip-counter');
 const digits = targetNumber.toString().length;
 
@@ -33,7 +33,7 @@ function flipDigit(digitEl, from, to) {
 }
 
 // Hochzählen – echtes Tacho-Verhalten
-function animateTo(target, duration = 1500) {
+function animateTo(target, duration = 600) {
     const startNum = parseInt(current.join(''), 10);
     let frame = 0;
     const steps = Math.max(20, Math.abs(target - startNum));
