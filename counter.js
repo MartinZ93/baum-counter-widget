@@ -3,10 +3,11 @@ const digits = targetNumber.toString().length;
 const counter = document.getElementById('flip-counter');
 counter.innerHTML = '';
 
+let currentNumberArr = Array(digits).fill(0);
+
 for (let i = 0; i < digits; i++) {
     const digitContainer = document.createElement('div');
     digitContainer.className = 'digit';
-    // Starte alle mit "0"
     digitContainer.innerHTML = `<span class="digit-static">0</span>`;
     counter.appendChild(digitContainer);
 }
@@ -18,36 +19,47 @@ function flipTo(digitEl, from, to) {
         <span class="digit-bottom">${to}</span>
       </div>
     `;
-    // Animation triggern
     void digitEl.offsetWidth;
     digitEl.querySelector('.digit-flip').classList.add('animate');
     setTimeout(() => {
       digitEl.innerHTML = `<span class="digit-static">${to}</span>`;
-    }, 400); // Synchron zur CSS-Animation (0.4s)
+    }, 400);
 }
 
-function animateCounter(toNumber) {
-    const numberArr = toNumber.toString().padStart(digits, '0').split('');
-    for (let i = 0; i < digits; i++) {
-        const digit = counter.children[i];
-        const targetDigit = Number(numberArr[i]);
-        let currentDigit = 0;
-        // Wenn Zielziffer 0: Keine Animation
-        if (targetDigit === 0) {
-            digit.innerHTML = `<span class="digit-static">0</span>`;
-            continue;
+// Neue Logik: Nur veränderte Ziffern flippen!
+function animateToNumber(newNumber) {
+    const newArr = newNumber.toString().padStart(digits, '0').split('').map(Number);
+    let i = digits - 1;
+    function animateDigit() {
+        if (i < 0) return;
+        if (currentNumberArr[i] !== newArr[i]) {
+            flipTo(counter.children[i], currentNumberArr[i], newArr[i]);
+            currentNumberArr[i] = newArr[i];
         }
-        function step() {
-            if (currentDigit < targetDigit) {
-                flipTo(digit, currentDigit, currentDigit + 1);
-                currentDigit++;
-                setTimeout(step, 80); // Geschwindigkeit je Flip
-            } else {
-                flipTo(digit, currentDigit, targetDigit);
-            }
-        }
-        step();
+        i--;
+        setTimeout(animateDigit, 120); // Versetzt für Flip-Effekt!
     }
+    animateDigit();
 }
 
-animateCounter(targetNumber);
+// Init (startet Counter von 0 → Ziel)
+function animatedCountUp(toNumber, duration = 1300) {
+    let start = 0;
+    const steps = 40;
+    const diff = toNumber - start;
+    let currentStep = 0;
+    function step() {
+        const value = Math.round(start + (diff * (currentStep / steps)));
+        animateToNumber(value);
+        if (currentStep < steps) {
+            currentStep++;
+            setTimeout(step, duration / steps);
+        } else {
+            animateToNumber(toNumber); // Letztes Mal Zielwert setzen
+        }
+    }
+    step();
+}
+
+animatedCountUp(targetNumber);
+
