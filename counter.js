@@ -85,7 +85,7 @@ function setup() {
 async function animateToTarget(current, target) {
   for (let n = 1; n <= target; n++) {
     showNumber(n);
-    await new Promise(res => setTimeout(res, 30)); // Geschwindigkeit
+    await new Promise(res => setTimeout(res, 5)); // Geschwindigkeit
   }
 }
 
