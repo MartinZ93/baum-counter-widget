@@ -22,13 +22,13 @@ function flipDigit(digitEl, from, to) {
         flip.style.transform = 'rotateX(-90deg)';
         flip.style.opacity = 0;
         digitEl.querySelector('.digit-inner').textContent = to;
-    }, 120); // schnelle Animation!
+    }, 145); // schnelle Animation!
     setTimeout(() => {
         if (flip.parentNode) flip.parentNode.removeChild(flip);
-    }, 180);
+    }, 200);
 }
 
-function animateTo(target, duration = 500) {
+function animateTo(target, duration = 600) {
     const startNum = parseInt(current.join(''), 10);
     const steps = 25;
     let frame = 0;
