@@ -26,10 +26,10 @@ function flipDigit(digitEl, from, to) {
         flip.style.transform = 'rotateX(-90deg)';
         flip.style.opacity = 0;
         digitEl.querySelector('.digit-inner').textContent = to;
-    }, 250); // schnellere Animation!
+    }, 150); // schnellere Animation!
     setTimeout(() => {
         if (flip.parentNode) flip.parentNode.removeChild(flip);
-    }, 350);
+    }, 220);
 }
 
 // SYNCHRONES Hochzählen
