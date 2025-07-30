@@ -1,8 +1,7 @@
-const targetNumber = 3450; // Deine Zielzahl
-const duration = 1200; // Animationsdauer in ms
+const targetNumber = 3450; // Zielzahl
+const duration = 1200; // Animationsdauer (nicht ganz verwendet)
 const digits = targetNumber.toString().length;
 
-// Counter-Container leeren & neue Ziffern anlegen
 const counter = document.getElementById('counter');
 counter.innerHTML = '';
 for (let i = 0; i < digits; i++) {
@@ -11,29 +10,27 @@ for (let i = 0; i < digits; i++) {
     counter.appendChild(digitContainer);
 }
 
-// Hilfsfunktion: Animation pro Ziffer
 function flipTo(digitEl, from, to) {
-    digitEl.innerHTML = '';
-    const digitTop = document.createElement('div');
-    digitTop.className = 'digit-top';
-    digitTop.textContent = from;
-    const digitBottom = document.createElement('div');
-    digitBottom.className = 'digit-bottom';
-    digitBottom.textContent = to;
-
-    digitEl.appendChild(digitTop);
-    digitEl.appendChild(digitBottom);
-
+    digitEl.innerHTML = `
+      <div class="digit-flip">
+        <span class="digit-top">${from}</span>
+        <span class="digit-bottom">${to}</span>
+      </div>
+    `;
+    // Trigger reflow to re-apply the animation class
+    void digitEl.offsetWidth;
+    digitEl.querySelector('.digit-flip').classList.add('animate');
     setTimeout(() => {
-        digitTop.classList.add('flip');
-        digitTop.textContent = to;
-    }, 30);
+      // Nach der Animation: Nur noch die neue Ziffer zeigen
+      digitEl.innerHTML = `
+        <span class="digit-static">${to}</span>
+      `;
+    }, 450); // Passe zur Animationsdauer in CSS an!
 }
 
 async function animateCounter(toNumber) {
     const numberArr = toNumber.toString().padStart(digits, '0').split('');
     for (let i = 0; i < digits; i++) {
-        let d = 0;
         const digit = counter.children[i];
         const targetDigit = Number(numberArr[i]);
         let currentDigit = 0;
@@ -41,7 +38,7 @@ async function animateCounter(toNumber) {
             if (currentDigit < targetDigit) {
                 flipTo(digit, currentDigit, currentDigit + 1);
                 currentDigit++;
-                setTimeout(step, 60); // Geschwindigkeit je Ziffer!
+                setTimeout(step, 80); // Geschwindigkeit pro Flip
             } else {
                 flipTo(digit, currentDigit, targetDigit);
             }
