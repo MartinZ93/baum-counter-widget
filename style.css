@@ -1,0 +1,40 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background: #ecf9f3;
+  margin: 0;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.counter-widget {
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.logo {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+#flip-counter {
+  font-size: 60px;
+  font-weight: bold;
+  color: #155b2f;
+  background: #ecf9f3;
+  padding: 20px 40px;
+  border-radius: 10px;
+  letter-spacing: 4px;
+  display: inline-block;
+  transition: all 0.5s ease;
+}
+
+.label {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #555;
+}
