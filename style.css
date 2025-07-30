@@ -1,9 +1,8 @@
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #ecf9f3;
+  background: #ecf9f3;
   color: #155b2f;
   text-align: center;
+  font-family: Arial, sans-serif;
 }
 
 .container {
@@ -16,42 +15,106 @@ body {
 }
 
 .headline {
-  font-size: 2em;
-  margin-bottom: 30px;
+  font-size: 2.2em;
   font-weight: bold;
+  margin-bottom: 30px;
+  color: #155b2f;
 }
 
-#flip-counter {
+.flip-counter {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 16px;
+  margin-top: 30px;
 }
 
-.digit {
+.flip-card {
+  perspective: 400px;
+}
+
+.flip-digit {
   position: relative;
-  background: #155b2f;
-  color: white;
-  width: 60px;
+  width: 66px;
   height: 90px;
+  background: #155b2f;
+  color: #fff;
+  border-radius: 12px;
   font-size: 60px;
-  border-radius: 10px;
   line-height: 90px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-  perspective: 1000px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 7px 16px rgba(0,0,0,0.16);
+  margin: 0 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
+  border-bottom: 5px solid #e97926;
 }
 
-.digit span {
-  display: block;
+.flip-digit .top, .flip-digit .bottom {
   position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-digit .top {
+  top: 0;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.flip-digit .bottom {
+  bottom: 0;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.flip-digit .top .digit-value,
+.flip-digit .bottom .digit-value {
+  display: block;
   width: 100%;
   height: 100%;
-  transform-origin: bottom;
-  backface-visibility: hidden;
-  animation: flip 0.5s ease forwards;
+  font-size: 60px;
+  line-height: 45px;
+  text-align: center;
 }
 
-@keyframes flip {
-  0% { transform: rotateX(90deg); opacity: 0; }
-  100% { transform: rotateX(0deg); opacity: 1; }
+.flip-digit .top-flip, .flip-digit .bottom-flip {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  z-index: 1;
+  background: #155b2f;
+}
+
+.flip-digit .top-flip {
+  top: 0;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  transform-origin: bottom;
+  animation: flipTop 0.4s forwards;
+}
+
+.flip-digit .bottom-flip {
+  bottom: 0;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  transform-origin: top;
+  animation: flipBottom 0.4s forwards;
+}
+
+@keyframes flipTop {
+  0% { transform: rotateX(0deg); }
+  100% { transform: rotateX(-90deg); }
+}
+
+@keyframes flipBottom {
+  0% { transform: rotateX(90deg); }
+  100% { transform: rotateX(0deg); }
 }
