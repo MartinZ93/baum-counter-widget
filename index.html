@@ -6,11 +6,20 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <img src="Design ohne Titel (4).svg" alt="Logo" class="logo" />
-    <h1 class="headline">Gepflanzte Bäume</h1>
-    <div id="flip-counter"></div>
+  <div class="baumpaten-widget" id="widget-clickarea">
+    <div class="widget-content">
+      <div class="gemeinsam">Gemeinsam mit</div>
+      <img src="Design ohne Titel (4).svg" alt="Logo" class="logo" />
+      <h1 class="headline">gepflanzte Bäume</h1>
+      <div id="flip-counter"></div>
+    </div>
   </div>
   <script src="counter.js"></script>
+  <script>
+    // Widget ist komplett klickbar
+    document.getElementById('widget-clickarea').onclick = function() {
+      window.open('https://baumpaten-deutschland.de/products/deine-baumpatenschaft', '_blank');
+    }
+  </script>
 </body>
 </html>
