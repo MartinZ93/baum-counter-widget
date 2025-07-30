@@ -5,37 +5,58 @@ html, body {
     font-family: system-ui, Arial, sans-serif;
     background: #fff;
 }
-.container {
-    min-height: 100vh;
-    width: 100vw;
+.baumpaten-widget {
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto;
+    background: #155b2f;
+    border-radius: 30px;
+    box-shadow: 0 8px 32px #0001;
+    padding: 36px 24px 36px 24px;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    border: 4px solid #155b2f;
+}
+.baumpaten-widget:hover {
+    box-shadow: 0 12px 36px #0003;
+}
+.widget-content {
+    background: #fff;
+    border-radius: 20px;
+    padding: 24px 10px 32px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    gap: 24px;
-    margin-top: 30px;
+}
+.gemeinsam {
+    color: #155b2f;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 14px;
+    text-align: center;
+    font-family: inherit;
 }
 .logo {
-    width: 340px;
-    max-width: 90vw;
-    margin-bottom: 10px;
+    width: 180px;
+    max-width: 80vw;
+    margin-bottom: 24px;
+    margin-top: 4px;
     display: block;
 }
 .headline {
     font-family: inherit;
-    font-size: 2.2rem;
+    font-size: 2rem;
     color: #155b2f;
-    margin: 0 0 20px 0;
-    letter-spacing: 0.01em;
+    margin: 0 0 28px 0;
     text-align: center;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.01em;
 }
 #flip-counter {
     display: flex;
     gap: 24px;
     justify-content: center;
     align-items: center;
-    width: 100vw;
     margin-top: 0;
 }
 .flip-digit {
@@ -73,7 +94,7 @@ html, body {
     height: 100%;
     left: 0;
     top: 0;
-    animation: flipUp 0.5s cubic-bezier(.4,0,.2,1);
+    animation: flipUp 0.25s cubic-bezier(.4,0,.2,1);
     background: #155b2f;
     color: #ecf9f3;
     border-radius: 18px;
@@ -102,22 +123,35 @@ html, body {
 }
 
 @media (max-width: 700px) {
+    .baumpaten-widget {
+        max-width: 98vw;
+        padding: 12px 0 20px 0;
+        border-radius: 16px;
+    }
+    .widget-content {
+        padding: 8px 2vw 18px 2vw;
+        border-radius: 10px;
+    }
     .logo {
-        width: 170px;
+        width: 100px;
     }
     .headline {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
+        margin-bottom: 14px;
+    }
+    .gemeinsam {
+        font-size: 1.04rem;
     }
     .flip-digit {
-        width: 45px;
-        height: 65px;
-        font-size: 38px;
+        width: 43px;
+        height: 62px;
+        font-size: 33px;
     }
     .flip-digit .flip,
     .flip-digit .digit-inner {
-        font-size: 38px;
+        font-size: 33px;
     }
     #flip-counter {
-        gap: 10px;
+        gap: 9px;
     }
 }
