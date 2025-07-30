@@ -33,7 +33,7 @@ function flipDigit(digitEl, from, to) {
 }
 
 // Hochzählen – echtes Tacho-Verhalten
-function animateTo(target, duration = 100) {
+function animateTo(target, duration = 10) {
     const startNum = parseInt(current.join(''), 10);
     let frame = 0;
     const steps = Math.max(20, Math.abs(target - startNum));
