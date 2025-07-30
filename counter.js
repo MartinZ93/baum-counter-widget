@@ -1,15 +1,38 @@
-// counter.js
+const targetNumber = 3450;
+const counterDiv = document.getElementById("counter");
 
-// Manuell anpassbare Baumanzahl – hier kannst du den Wert ändern
-const treeCount = 3450;
+function createDigitElement(digit) {
+  const digitEl = document.createElement("div");
+  digitEl.className = "flip-digit";
+  digitEl.textContent = digit;
+  return digitEl;
+}
 
-// Container für die Anzeige holen
-const container = document.getElementById("counter");
+function updateCounter(number) {
+  counterDiv.innerHTML = "";
+  const digits = number.toString().padStart(4, "0").split("");
+  digits.forEach((digit) => {
+    counterDiv.appendChild(createDigitElement(digit));
+  });
+}
 
-// Zahlen einzeln in Boxen rendern
-treeCount.toString().split("").forEach(digit => {
-  const digitBox = document.createElement("div");
-  digitBox.className = "flip-digit";
-  digitBox.textContent = digit;
-  container.appendChild(digitBox);
-});
+function animateCountUp(toNumber, duration = 1500) {
+  const start = 0;
+  const frameRate = 30;
+  const steps = Math.ceil(duration / frameRate);
+  let currentStep = 0;
+
+  const interval = setInterval(() => {
+    currentStep++;
+    const progress = currentStep / steps;
+    const currentValue = Math.floor(progress * toNumber);
+    updateCounter(currentValue);
+
+    if (currentStep >= steps) {
+      updateCounter(toNumber);
+      clearInterval(interval);
+    }
+  }, frameRate);
+}
+
+animateCountUp(targetNumber);
