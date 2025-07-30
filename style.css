@@ -1,71 +1,39 @@
 body {
-  font-family: "Arial", sans-serif;
   background-color: #ecf9f3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
-.container {
+  font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #fff;
-  border: 4px solid #155b2f;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  padding: 50px;
 }
 
 .logo {
-  width: 120px;
+  width: 200px;
   margin-bottom: 20px;
 }
 
 h1 {
-  font-size: 18px;
   color: #155b2f;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: 36px;
+  margin-bottom: 40px;
 }
 
-.counter {
+.counter-container {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin: 20px 0;
+  font-size: 64px;
 }
 
-.digit {
+.flip-digit {
   background-color: #155b2f;
   color: white;
-  font-size: 48px;
   width: 60px;
-  height: 80px;
-  border-radius: 8px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   font-weight: bold;
-  position: relative;
-  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.digit::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.4);
-}
-
-.unit {
-  font-size: 24px;
-  font-weight: 600;
-  color: #e97926;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  font-size: 48px;
+  font-family: monospace;
 }
