@@ -1,93 +1,52 @@
-const target = 3450; // Deine Zielzahl
-const digits = String(target).padStart(4, "0").split(""); // Für führende Nullen
-const flipCounter = document.getElementById("flip-counter");
+const targetNumber = 3450; // Deine Zielzahl
+const duration = 1200; // Animationsdauer in ms
+const digits = targetNumber.toString().length;
 
-let current = 0;
-
-function createFlipDigit(initialDigit) {
-  const card = document.createElement("div");
-  card.className = "flip-card";
-
-  const digit = document.createElement("div");
-  digit.className = "flip-digit";
-
-  const top = document.createElement("div");
-  top.className = "top";
-  const topValue = document.createElement("span");
-  topValue.className = "digit-value";
-  topValue.textContent = initialDigit;
-  top.appendChild(topValue);
-
-  const bottom = document.createElement("div");
-  bottom.className = "bottom";
-  const bottomValue = document.createElement("span");
-  bottomValue.className = "digit-value";
-  bottomValue.textContent = initialDigit;
-  bottom.appendChild(bottomValue);
-
-  digit.appendChild(top);
-  digit.appendChild(bottom);
-  card.appendChild(digit);
-  return card;
+// Counter-Container leeren & neue Ziffern anlegen
+const counter = document.getElementById('counter');
+counter.innerHTML = '';
+for (let i = 0; i < digits; i++) {
+    const digitContainer = document.createElement('div');
+    digitContainer.className = 'digit';
+    counter.appendChild(digitContainer);
 }
 
-function updateFlip(card, newDigit) {
-  const digit = card.querySelector(".flip-digit");
-  const top = digit.querySelector(".top .digit-value");
-  const bottom = digit.querySelector(".bottom .digit-value");
-  const oldDigit = top.textContent;
+// Hilfsfunktion: Animation pro Ziffer
+function flipTo(digitEl, from, to) {
+    digitEl.innerHTML = '';
+    const digitTop = document.createElement('div');
+    digitTop.className = 'digit-top';
+    digitTop.textContent = from;
+    const digitBottom = document.createElement('div');
+    digitBottom.className = 'digit-bottom';
+    digitBottom.textContent = to;
 
-  if (oldDigit === newDigit) return;
+    digitEl.appendChild(digitTop);
+    digitEl.appendChild(digitBottom);
 
-  const topFlip = document.createElement("div");
-  topFlip.className = "top-flip";
-  const topFlipValue = document.createElement("span");
-  topFlipValue.className = "digit-value";
-  topFlipValue.textContent = oldDigit;
-  topFlip.appendChild(topFlipValue);
-
-  const bottomFlip = document.createElement("div");
-  bottomFlip.className = "bottom-flip";
-  const bottomFlipValue = document.createElement("span");
-  bottomFlipValue.className = "digit-value";
-  bottomFlipValue.textContent = newDigit;
-  bottomFlip.appendChild(bottomFlipValue);
-
-  topFlip.addEventListener("animationend", function () {
-    top.textContent = newDigit;
-    topFlip.remove();
-  });
-  bottomFlip.addEventListener("animationend", function () {
-    bottom.textContent = newDigit;
-    bottomFlip.remove();
-  });
-
-  digit.appendChild(topFlip);
-  digit.appendChild(bottomFlip);
+    setTimeout(() => {
+        digitTop.classList.add('flip');
+        digitTop.textContent = to;
+    }, 30);
 }
 
-function showNumber(num) {
-  const numStr = String(num).padStart(digits.length, "0");
-  for (let i = 0; i < digits.length; i++) {
-    const card = flipCounter.children[i];
-    updateFlip(card, numStr[i]);
-  }
+async function animateCounter(toNumber) {
+    const numberArr = toNumber.toString().padStart(digits, '0').split('');
+    for (let i = 0; i < digits; i++) {
+        let d = 0;
+        const digit = counter.children[i];
+        const targetDigit = Number(numberArr[i]);
+        let currentDigit = 0;
+        function step() {
+            if (currentDigit < targetDigit) {
+                flipTo(digit, currentDigit, currentDigit + 1);
+                currentDigit++;
+                setTimeout(step, 60); // Geschwindigkeit je Ziffer!
+            } else {
+                flipTo(digit, currentDigit, targetDigit);
+            }
+        }
+        step();
+    }
 }
-
-function setup() {
-  flipCounter.innerHTML = "";
-  for (const d of digits) {
-    flipCounter.appendChild(createFlipDigit("0"));
-  }
-  showNumber(0);
-}
-
-async function animateToTarget(current, target) {
-  for (let n = 1; n <= target; n++) {
-    showNumber(n);
-    await new Promise(res => setTimeout(res, 5)); // Geschwindigkeit
-  }
-}
-
-setup();
-animateToTarget(0, target);
+animateCounter(targetNumber);
