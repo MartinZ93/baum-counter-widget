@@ -1,49 +1,47 @@
-const targetNumber = 1745; // ← Zielwert hier setzen
-const counterDiv = document.getElementById("counter");
+// counter.js
 
-function createFlipDigit(digit) {
-  const flipBox = document.createElement("div");
-  flipBox.className = "flip-box";
+const target = 3450;
+const container = document.getElementById("flip-counter");
 
-  const flipInner = document.createElement("div");
-  flipInner.className = "flip-inner";
+function createDigit(digit) {
+  const card = document.createElement("div");
+  card.className = "flip-card";
 
-  const top = document.createElement("div");
-  top.className = "flip-top";
-  top.textContent = digit;
+  const digitDiv = document.createElement("div");
+  digitDiv.className = "digit";
+  digitDiv.textContent = digit;
 
-  const bottom = document.createElement("div");
-  bottom.className = "flip-bottom";
-  bottom.textContent = digit;
-
-  flipInner.appendChild(top);
-  flipInner.appendChild(bottom);
-  flipBox.appendChild(flipInner);
-
-  return flipBox;
+  card.appendChild(digitDiv);
+  return card;
 }
 
-function updateCounter(number) {
-  counterDiv.innerHTML = "";
-  const digits = number.toString().padStart(4, "0").split(""); // z. B. 01745
-  digits.forEach((digit) => {
-    counterDiv.appendChild(createFlipDigit(digit));
+function updateCounter(value) {
+  container.innerHTML = "";
+  const str = value.toString().padStart(4, "0").split("");
+
+  str.forEach((digit) => {
+    const card = createDigit(digit);
+    container.appendChild(card);
+
+    setTimeout(() => {
+      card.classList.add("flip");
+    }, 100);
   });
 }
 
-function animateFlipUp(toNumber, duration = 1000) {
+function animateTo(targetValue) {
   let current = 0;
-  const step = Math.ceil(toNumber / 20); // schneller hochzählen
+  const step = Math.ceil(targetValue / 20);
 
   const interval = setInterval(() => {
     current += step;
-    if (current >= toNumber) {
-      updateCounter(toNumber);
+    if (current >= targetValue) {
+      updateCounter(targetValue);
       clearInterval(interval);
     } else {
       updateCounter(current);
     }
-  }, 50); // kürzerer Intervall für schnelleres Flippen
+  }, 80);
 }
 
-animateFlipUp(targetNumber);
+animateTo(target);
