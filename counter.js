@@ -1,47 +1,22 @@
-// counter.js
+const counterElement = document.getElementById('counter');
+const targetNumber = 3450; // Hier gewünschte Zahl eintragen
 
-const target = 3450;
-const container = document.getElementById("flip-counter");
-
-function createDigit(digit) {
-  const card = document.createElement("div");
-  card.className = "flip-card";
-
-  const digitDiv = document.createElement("div");
-  digitDiv.className = "digit";
+function createDigitElement(digit) {
+  const digitDiv = document.createElement('div');
+  digitDiv.classList.add('flip-digit');
   digitDiv.textContent = digit;
-
-  card.appendChild(digitDiv);
-  return card;
+  digitDiv.setAttribute('data-digit', digit);
+  return digitDiv;
 }
 
-function updateCounter(value) {
-  container.innerHTML = "";
-  const str = value.toString().padStart(4, "0").split("");
-
-  str.forEach((digit) => {
-    const card = createDigit(digit);
-    container.appendChild(card);
-
-    setTimeout(() => {
-      card.classList.add("flip");
-    }, 100);
+function renderCounter(number) {
+  const digits = number.toString().padStart(4, '0').split('');
+  counterElement.innerHTML = '';
+  digits.forEach(d => {
+    const el = createDigitElement(d);
+    el.classList.add('flip');
+    counterElement.appendChild(el);
   });
 }
 
-function animateTo(targetValue) {
-  let current = 0;
-  const step = Math.ceil(targetValue / 20);
-
-  const interval = setInterval(() => {
-    current += step;
-    if (current >= targetValue) {
-      updateCounter(targetValue);
-      clearInterval(interval);
-    } else {
-      updateCounter(current);
-    }
-  }, 80);
-}
-
-animateTo(target);
+renderCounter(targetNumber);
