@@ -1,4 +1,4 @@
-const targetNumber = 3450;
+const targetNumber = 17.450;
 const counterDiv = document.getElementById("counter");
 
 function createDigitElement(digit) {
