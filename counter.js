@@ -33,7 +33,7 @@ function flipDigit(digitEl, from, to) {
 }
 
 // SYNCHRONES Hochzählen
-function animateTo(target, duration = 600) {
+function animateTo(target, duration = 300) {
     const startNum = parseInt(current.join(''), 10);
     const steps = 40;
     let frame = 0;
