@@ -1,4 +1,4 @@
-const targetNumber = 13450;
+const targetNumber = 3450;
 const counter = document.getElementById('flip-counter');
 const digits = targetNumber.toString().length;
 
@@ -14,7 +14,7 @@ for (let i = 0; i < digits; i++) {
     counter.appendChild(digit);
 }
 
-// Flip-Animation für EINEN DIGIT (animiert nur, wenn sich Ziffer ändert)
+// Flip-Animation für EINEN DIGIT
 function flipDigit(digitEl, from, to) {
     if (from === to) return;
     const flip = document.createElement('span');
@@ -26,21 +26,22 @@ function flipDigit(digitEl, from, to) {
         flip.style.transform = 'rotateX(-90deg)';
         flip.style.opacity = 0;
         digitEl.querySelector('.digit-inner').textContent = to;
-    }, 400);
+    }, 250); // schnellere Animation!
     setTimeout(() => {
         if (flip.parentNode) flip.parentNode.removeChild(flip);
-    }, 500);
+    }, 350);
 }
 
-// Hochzählen – echtes Tacho-Verhalten
-function animateTo(target, duration = 10) {
+// SYNCHRONES Hochzählen
+function animateTo(target, duration = 600) {
     const startNum = parseInt(current.join(''), 10);
+    const steps = 40;
     let frame = 0;
-    const steps = Math.max(20, Math.abs(target - startNum));
     const stepTime = duration / steps;
 
     function step() {
-        let val = Math.round(startNum + (target - startNum) * (frame / steps));
+        const progress = frame / steps;
+        let val = Math.round(startNum + (target - startNum) * progress);
         let strVal = val.toString().padStart(digits, '0').split('');
         for (let i = 0; i < digits; i++) {
             const from = current[i];
@@ -55,13 +56,15 @@ function animateTo(target, duration = 10) {
             setTimeout(step, stepTime);
         } else {
             // Nachanimation: Endwert sauber setzen
+            let endStr = target.toString().padStart(digits, '0').split('');
             for (let i = 0; i < digits; i++) {
-                counter.children[i].querySelector('.digit-inner').textContent = strVal[i];
+                counter.children[i].querySelector('.digit-inner').textContent = endStr[i];
+                current[i] = endStr[i];
             }
         }
     }
     step();
 }
 
-// Los geht's!
-animateTo(targetNumber);
+// Start: alles gleichzeitig, schnell
+animateTo(targetNumber, 600); // Hier kannst du noch schneller/langsamer machen
