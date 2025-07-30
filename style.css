@@ -1,12 +1,43 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: #fff;
+}
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 32px;
+    margin-top: 30px;
+}
+.logo {
+    width: 340px;
+    max-width: 90vw;
+    margin-bottom: 12px;
+    display: block;
+}
+.headline {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #155b2f;
+    margin: 0 0 24px 0;
+    letter-spacing: 0.02em;
+    text-align: center;
+}
 #flip-counter {
     display: flex;
     gap: 30px;
     justify-content: center;
-    margin-top: 32px;
+    margin-top: 0;
 }
 .digit {
     background: #155b2f;
-    border-radius: 16px;
+    border-radius: 20px;
     width: 100px;
     height: 140px;
     display: flex;
@@ -17,6 +48,8 @@
     color: #ecf9f3;
     box-shadow: 0 7px 0 #e97926, 0 16px 32px #0002;
     overflow: hidden;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 400;
 }
 .digit-flip {
     position: absolute;
@@ -30,13 +63,14 @@
     width: 100%;
     text-align: center;
     height: 50%;
-    font-weight: 600;
+    font-weight: 400;
     position: absolute;
     left: 0;
     background: transparent;
     transition: transform 0.3s cubic-bezier(.8,0,1,1);
     font-size: 90px;
     color: #ecf9f3;
+    font-family: 'Montserrat', Arial, sans-serif;
 }
 .digit-top {
     top: 0;
@@ -78,4 +112,26 @@
     color: #ecf9f3;
     z-index: 0;
     background: transparent;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 400;
+}
+
+@media (max-width: 700px) {
+    .logo {
+        width: 180px;
+    }
+    .headline {
+        font-size: 1.4rem;
+    }
+    #flip-counter .digit, .digit {
+        width: 50px;
+        height: 70px;
+        font-size: 40px;
+    }
+    .digit-static, .digit-top, .digit-bottom {
+        font-size: 40px;
+    }
+    #flip-counter {
+        gap: 14px;
+    }
 }
