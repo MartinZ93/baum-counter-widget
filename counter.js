@@ -1,11 +1,8 @@
 const targetNumber = 3450;
 const counter = document.getElementById('flip-counter');
 const digits = targetNumber.toString().length;
-
-// Startwert
 let current = Array(digits).fill(0);
 
-// Digit-Container bauen
 counter.innerHTML = '';
 for (let i = 0; i < digits; i++) {
     const digit = document.createElement('div');
@@ -14,7 +11,6 @@ for (let i = 0; i < digits; i++) {
     counter.appendChild(digit);
 }
 
-// Flip-Animation für EINEN DIGIT
 function flipDigit(digitEl, from, to) {
     if (from === to) return;
     const flip = document.createElement('span');
@@ -26,16 +22,15 @@ function flipDigit(digitEl, from, to) {
         flip.style.transform = 'rotateX(-90deg)';
         flip.style.opacity = 0;
         digitEl.querySelector('.digit-inner').textContent = to;
-    }, 150); // schnellere Animation!
+    }, 120); // schnelle Animation!
     setTimeout(() => {
         if (flip.parentNode) flip.parentNode.removeChild(flip);
-    }, 220);
+    }, 180);
 }
 
-// SYNCHRONES Hochzählen
-function animateTo(target, duration = 300) {
+function animateTo(target, duration = 500) {
     const startNum = parseInt(current.join(''), 10);
-    const steps = 40;
+    const steps = 25;
     let frame = 0;
     const stepTime = duration / steps;
 
@@ -55,7 +50,6 @@ function animateTo(target, duration = 300) {
         if (frame <= steps) {
             setTimeout(step, stepTime);
         } else {
-            // Nachanimation: Endwert sauber setzen
             let endStr = target.toString().padStart(digits, '0').split('');
             for (let i = 0; i < digits; i++) {
                 counter.children[i].querySelector('.digit-inner').textContent = endStr[i];
@@ -66,5 +60,4 @@ function animateTo(target, duration = 300) {
     step();
 }
 
-// Start: alles gleichzeitig, schnell
-animateTo(targetNumber, 600); // Hier kannst du noch schneller/langsamer machen
+animateTo(targetNumber, 500); // 500 ms Animation
