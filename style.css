@@ -1,39 +1,41 @@
 body {
-  background-color: #ecf9f3;
   font-family: Arial, sans-serif;
+  background-color: #ecf9f3;
   text-align: center;
   padding: 50px;
 }
 
 .logo {
-  width: 200px;
+  max-width: 200px;
   margin-bottom: 20px;
 }
 
 h1 {
   color: #155b2f;
   font-size: 36px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
-.counter-container {
+#counter {
   display: flex;
   justify-content: center;
   gap: 10px;
-  font-size: 64px;
 }
 
 .flip-digit {
   background-color: #155b2f;
-  color: white;
+  color: #ffffff;
+  font-size: 64px;
   width: 60px;
   height: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  line-height: 90px;
   font-weight: bold;
-  font-size: 48px;
-  font-family: monospace;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  transform-origin: bottom;
+  border-top: 3px solid #e97926;
+  border-bottom: 3px solid #e97926;
 }
