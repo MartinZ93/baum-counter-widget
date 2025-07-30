@@ -1,120 +1,48 @@
-body {
-  background: #ecf9f3;
-  color: #155b2f;
-  text-align: center;
-  font-family: Arial, sans-serif;
+#counter {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 32px;
 }
-
-.container {
-  padding: 40px 20px;
+.digit {
+    background: #155b2f;
+    border-radius: 16px;
+    width: 100px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 7px 0 #e97926, 0 16px 32px #0002;
+    font-size: 90px;
+    position: relative;
+    color: #ecf9f3;
+    overflow: hidden;
 }
-
-.logo {
-  max-width: 220px;
-  margin-bottom: 20px;
+.digit-top, .digit-bottom {
+    width: 100%;
+    text-align: center;
+    height: 50%;
+    font-weight: 600;
+    position: absolute;
+    left: 0;
+    background: transparent;
+    transition: transform 0.3s cubic-bezier(.8,0,1,1);
 }
-
-.headline {
-  font-size: 2.2em;
-  font-weight: bold;
-  margin-bottom: 30px;
-  color: #155b2f;
+.digit-top {
+    top: 0;
+    z-index: 2;
+    border-bottom: 2px solid #ffffff22;
 }
-
-.flip-counter {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 30px;
+.digit-bottom {
+    bottom: 0;
+    z-index: 1;
+    border-top: 2px solid #ffffff22;
 }
-
-.flip-card {
-  perspective: 400px;
+.digit-top.flip {
+    animation: flip .4s forwards;
 }
-
-.flip-digit {
-  position: relative;
-  width: 66px;
-  height: 90px;
-  background: #155b2f;
-  color: #fff;
-  border-radius: 12px;
-  font-size: 60px;
-  line-height: 90px;
-  font-weight: bold;
-  text-align: center;
-  box-shadow: 0 7px 16px rgba(0,0,0,0.16);
-  margin: 0 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-bottom: 5px solid #e97926;
-}
-
-.flip-digit .top, .flip-digit .bottom {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  overflow: hidden;
-  backface-visibility: hidden;
-}
-
-.flip-digit .top {
-  top: 0;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-}
-
-.flip-digit .bottom {
-  bottom: 0;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-}
-
-.flip-digit .top .digit-value,
-.flip-digit .bottom .digit-value {
-  display: block;
-  width: 100%;
-  height: 100%;
-  font-size: 60px;
-  line-height: 45px;
-  text-align: center;
-}
-
-.flip-digit .top-flip, .flip-digit .bottom-flip {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  overflow: hidden;
-  z-index: 1;
-  background: #155b2f;
-}
-
-.flip-digit .top-flip {
-  top: 0;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  transform-origin: bottom;
-  animation: flipTop 0.4s forwards;
-}
-
-.flip-digit .bottom-flip {
-  bottom: 0;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-  transform-origin: top;
-  animation: flipBottom 0.4s forwards;
-}
-
-@keyframes flipTop {
-  0% { transform: rotateX(0deg); }
-  100% { transform: rotateX(-90deg); }
-}
-
-@keyframes flipBottom {
-  0% { transform: rotateX(90deg); }
-  100% { transform: rotateX(0deg); }
+@keyframes flip {
+    0%   { transform: rotateX(0); }
+    100% { transform: rotateX(-90deg);}
 }
